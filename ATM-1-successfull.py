@@ -1,7 +1,9 @@
+import hashlib
 
 global b
 b=20000
 def home():
+    flag = 0
     print('\r')
     print("-"*80)
     print("                            WELCOME TO 'ATM'   ")
@@ -14,6 +16,9 @@ def home():
     print(" PRESS 3 TO ASK FOR LOAN ->")
     print('\r')
     print(" PRESS 4 TO WITHDRAW AMOUNT ->")
+    print('\r')
+    
+    print(" PRESS 5 TO ADMIN ACCOUNT ->")
     print('\r')
     
 def balance():
@@ -47,7 +52,29 @@ def withdraw(amt):
        return(b)
        
        home()
-
+    
+def admin_pass():
+    print("Are you really admin? Then tell me the password")
+    strr = input("Enter your secret password")
+    
+    print("We have added salt to password, so do not try to bruteforce it; haha i still know a implementation fault in it, can you find it and be admin")
+    
+    import hashlib, uuid
+    salt = uuid.uuid4().hex
+    hashed_password = hashlib.sha512(strr + salt).hexdigest()
+    if result == "f6071725e7ddeb434fb6b32b8ec4a2b14dd7db0d785347b2fb48f9975126178f":
+        flag = 1
+        print("WOW! You have become admin")
+        
+    else:
+        flag = 0
+        
+    
+    
+    
+    
+    
+    
 home()
 while True:
     a=int(input("Enter your choice ->"))
@@ -61,6 +88,12 @@ while True:
         c=int(input("Enter the loan amount that you want ->"))
         d=loan(c)   
         print(balance())
+        
+    elif(a=5):
+        flag = 0
+        admin_pass()
+        home()
+        
     elif(a==4):
        e=int(input("Enter the amt you want to withdraw ->"))
        withdraw(e)
